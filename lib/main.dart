@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_exercise/RiverPod_StateFul_Widget/riverpod_stateful_widget.dart';
-import 'package:riverpod_exercise/RiverPod_StateFul_Widget/stateful_animation_screen.dart';
-import 'package:riverpod_exercise/StateProviderDemo/state_provider_demo.dart';
+import 'package:riverpod_exercise/Section2/FutureProviderDemo/greetingScreen.dart';
+import 'Section1/RiverPod_StateFul_Widget/stateful_animation_screen.dart';
 
 void main() {
   runApp(ProviderScope(child: MaterialApp(home: const MyApp(),)));
@@ -28,7 +27,9 @@ class MyApp extends ConsumerWidget {
     // return StateProviderDemo();
 
     // return Riverpod_Stateful_Widget();
-    return StateFul_Animation_Screen();
+    // return StateFul_Animation_Screen();
+
+    return Greetingscreen();
   }
 }
 
