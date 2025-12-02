@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_exercise/RiverPod_StateFul_Widget/riverpod_stateful_widget.dart';
+import 'package:riverpod_exercise/RiverPod_StateFul_Widget/stateful_animation_screen.dart';
+import 'package:riverpod_exercise/StateProviderDemo/state_provider_demo.dart';
 
 void main() {
   runApp(ProviderScope(child: MaterialApp(home: const MyApp(),)));
@@ -14,13 +17,18 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final SP = ref.watch(staticProvider);
+    // final SP = ref.watch(staticProvider);
     
-    return Scaffold(
-      body: Center(
-        child: Text(SP),
-      ),
-    );
+    // return Scaffold(
+    //   body: Center(
+    //     child: Text(SP),
+    //   ),
+    // );
+
+    // return StateProviderDemo();
+
+    // return Riverpod_Stateful_Widget();
+    return StateFul_Animation_Screen();
   }
 }
 

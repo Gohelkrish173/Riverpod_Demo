@@ -13,13 +13,39 @@ class StateProviderDemo extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    // use counterProvider
-    final counter = ref.watch(counterProvider);
-
+    print("Build method Loaded.");
     return Scaffold(
       appBar: AppBar(title: Text('State Provider Tutorial.'),),
-      floatingActionButton: IconButton(onPressed: () {}, icon: Icon(Icons.add)),
-      body: Center(child: Text('0'),),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          IconButton(onPressed: () {
+            // here notifier is provide the state Controll. state++ update the count +1 of stateProvider.
+            ref.read(counterProvider.notifier).state++;
+          },
+              icon: Icon(Icons.add)
+          ),
+          SizedBox(width: 10,),
+          IconButton(onPressed: () {
+            // here notifier is provide the state Controll. state-- update the count -1 of stateProvider.
+            ref.read(counterProvider.notifier).state--;
+          },
+              icon: Icon(Icons.exposure_minus_1)
+          ),
+        ],
+      ),
+      body: Center(
+        // it's use for update only part of updated StateProviders and UI.
+        // it does not update whole build when state updated.
+        child : Consumer(
+          builder: (BuildContext context,WidgetRef ref,Widget? child){
+            // use counterProvider
+            final counter = ref.watch(counterProvider);
+            print("Consumer method Loaded.");
+            return Text(counter.toString());
+          },
+        ),
+      ),
     );
   }
 }
