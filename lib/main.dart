@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_exercise/Section2/FutureProviderDemo/StudentData_Using_FutureProvider.dart';
+import 'package:riverpod_exercise/Section2/FutureProviderDemo/foodData_using_FutureProvider.dart';
 import 'package:riverpod_exercise/Section2/FutureProviderDemo/greetingScreen.dart';
 import 'Section1/RiverPod_StateFul_Widget/stateful_animation_screen.dart';
 
@@ -29,7 +31,9 @@ class MyApp extends ConsumerWidget {
     // return Riverpod_Stateful_Widget();
     // return StateFul_Animation_Screen();
 
-    return Greetingscreen();
+    // return Greetingscreen();
+    // return FoodData_Using_FutureProvider();
+    return StudentData_FutureProvider();
   }
 }
 
