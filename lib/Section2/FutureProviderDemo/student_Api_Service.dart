@@ -19,6 +19,7 @@ class Student_Service{
 
     final List<StudentModel> StudentList = StudentModel.listStudent(dynamicList);
 
+    print("=====================");
     print(StudentList);
 
     return StudentList;

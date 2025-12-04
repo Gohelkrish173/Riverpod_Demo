@@ -14,6 +14,7 @@ final studentFutureProvider = FutureProvider((Ref ref) async{
 
 // UI
 
+// ConsumerWidget is StatelessWidget
 class StudentData_FutureProvider extends ConsumerWidget {
   const StudentData_FutureProvider({super.key});
 
@@ -24,6 +25,7 @@ class StudentData_FutureProvider extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Student Data"),),
       body: AsyncStudent.when(
+        skipLoadingOnReload: false,
         data: (stu) => ListView.builder(
           padding: EdgeInsets.all(2),
           itemBuilder: (context, index) {

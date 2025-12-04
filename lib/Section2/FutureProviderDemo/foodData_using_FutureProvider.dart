@@ -11,7 +11,7 @@ final foodFutureProvider = FutureProvider((Ref ref) async{
 });
 
 // UI Screen
-
+// ConsumerWidget is StatelessWidget
 class FoodData_Using_FutureProvider extends ConsumerWidget {
   const FoodData_Using_FutureProvider({super.key});
 

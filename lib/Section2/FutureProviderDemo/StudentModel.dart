@@ -1,6 +1,6 @@
 
 class StudentModel{
-  int? id;
+  String? id;
   String name;
   String ENRNO;
   double TotalMarks;
@@ -18,7 +18,7 @@ class StudentModel{
       id : json['id'],
       name: json['name'],
       ENRNO: json['ENRNO'],
-      TotalMarks: json['TotalMarks']
+      TotalMarks: json['TotalMarks'] ?? 0
     );
   }
 

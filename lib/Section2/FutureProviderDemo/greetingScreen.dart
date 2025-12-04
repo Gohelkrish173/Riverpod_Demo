@@ -15,6 +15,7 @@ final greetingFutureProvider = FutureProvider((Ref ref) async{
 
 // UI Screen to display Future Data
 
+// ConsumerWidget is StatelessWidget
 class Greetingscreen extends ConsumerWidget {
   const Greetingscreen({super.key});
 

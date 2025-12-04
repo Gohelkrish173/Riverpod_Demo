@@ -8,6 +8,7 @@ final counterProvider = StateProvider((Ref ref){
   return 0;
 });
 
+// ConsumerWidget is StatelessWidget
 class StateProviderDemo extends ConsumerWidget {
   const StateProviderDemo({super.key});
 
