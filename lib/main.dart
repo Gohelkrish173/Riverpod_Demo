@@ -3,6 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_exercise/Section2/FutureProviderDemo/StudentData_Using_FutureProvider.dart';
 import 'package:riverpod_exercise/Section2/FutureProviderDemo/foodData_using_FutureProvider.dart';
 import 'package:riverpod_exercise/Section2/FutureProviderDemo/greetingScreen.dart';
+import 'package:riverpod_exercise/Section2/StateNotifierDemo/counter_example/counter_screen_state_notifier.dart';
+import 'package:riverpod_exercise/Section2/StateNotifierDemo/student_api_example/student_crud_using_state_notifier.dart';
+import 'package:riverpod_exercise/Section2/StateNotifierDemo/todo_example/todo_screen_using_state_notifier_provider.dart';
 import 'package:riverpod_exercise/Section2/StreamProviderDemo/timer_screen_using_stream_provider.dart';
 import 'Section1/RiverPod_StateFul_Widget/stateful_animation_screen.dart';
 
@@ -36,7 +39,11 @@ class MyApp extends ConsumerWidget {
     // return FoodData_Using_FutureProvider();
     // return StudentData_FutureProvider();
 
-    return TimerScreen_Using_StreamProvider();
+    // return TimerScreen_Using_StreamProvider();
+
+    // return CounterScreen_StateNotifier();
+    // return TodoScreen_Using_StateNotifier();
+    return StudentCrudUsingStateNotifier();
   }
 }
 

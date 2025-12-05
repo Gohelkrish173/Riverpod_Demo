@@ -7,6 +7,10 @@ import 'package:riverpod_exercise/Section2/FutureProviderDemo/student_Api_Servic
 // Riverpod Provider
 final studentApiProvider = Provider((Ref ref)=>Student_Service());
 
+// with Future Provider it is only fetch the Data one time And then fix
+// and if data change it can't automatically updated you want to refresh for updated data.
+// it is use for Fixed data.
+
 final studentFutureProvider = FutureProvider((Ref ref) async{
   final service = ref.read(studentApiProvider);
   return await service.FetchAPI();
