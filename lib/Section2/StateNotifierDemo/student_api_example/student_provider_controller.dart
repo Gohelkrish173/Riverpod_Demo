@@ -43,16 +43,20 @@ class StudentNotifier extends StateNotifier<List<Student_Model>>{
     state = [...state,newStudent];
   }
 
-  Future<void> Update(Student_Model s) async{
+  Future<void> Update(Student_Model s,String id) async{
     final students = [...state];
 
-    final index = students.indexWhere((t)=>t.id == s.id);
+    print("${s.id}=${s.ENRNO}=${s.name}=${s.TotalMarks}");
+
+    final index = students.indexWhere((t)=>t.id == id);
 
     if(index == -1) return;
 
     final Stu = students[index];
 
-    Student_Model S = Stu.copyWith(id: Stu.id,name: s.name,ENRNO: s.ENRNO,TotalMarks: s.TotalMarks);
+    Student_Model S = Stu.copyWith(id: id,name: s.name,ENRNO: s.ENRNO,TotalMarks: s.TotalMarks);
+
+    print("${S.id}-${S.ENRNO}-${S.name}-${S.TotalMarks}");
 
     final bool result = await service.UpdateData(S);
 

@@ -15,7 +15,7 @@ class _StudentCrudUsingStateNotifierState extends ConsumerState<StudentCrudUsing
   final nameController = TextEditingController();
   final enrController = TextEditingController();
   final tmController = TextEditingController();
-  String? Id = "";
+  String Id = "";
 
   @override
   void initState() {
@@ -67,22 +67,19 @@ class _StudentCrudUsingStateNotifierState extends ConsumerState<StudentCrudUsing
                 IconButton(
                   onPressed: () {
                     Student_Model S = Student_Model(
-                      id : Id == "" ? "0" : Id,
                       name: nameController.text.trim(),
                       ENRNO: enrController.text.trim(),
                       TotalMarks: double.parse(tmController.text.trim())
                     );
 
-                    print(nameController.text.trim());
-                    print(S.id);
-
                     //Insert Method
-                    notifier.Insert(S);
+                    Id == "" ? notifier.Insert(S) : notifier.Update(S,Id);
 
                     //Clean All Controller after add or update
                     nameController.clear();
                     tmController.clear();
                     enrController.clear();
+                    Id = "";
                   },
                   icon: Icon(Icons.add)
                 ),
@@ -117,7 +114,8 @@ class _StudentCrudUsingStateNotifierState extends ConsumerState<StudentCrudUsing
                             ),
                             IconButton(
                                 onPressed: () {
-                                  Id = student.id;
+                                  print(student.id);
+                                  Id = student.id ?? "";
                                   nameController.text = student.name;
                                   enrController.text = student.ENRNO;
                                   tmController.text = student.TotalMarks.toString();

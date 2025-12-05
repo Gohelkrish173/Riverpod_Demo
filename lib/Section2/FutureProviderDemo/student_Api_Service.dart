@@ -40,16 +40,16 @@ class Student_Service{
 
   Future<bool> InsertData(Student_Model s) async{
     final responce = await http.post(Uri.parse(API),body: jsonEncode(s));
-
-    if(responce.statusCode == 200) return true;
+    print(responce.statusCode);
+    if(responce.statusCode == 201 || responce.body != null) return true;
 
     return false;
   }
 
   Future<bool> UpdateData(Student_Model s) async{
-    final responce = await http.put(Uri.parse(API+"/${s.id}"),body: jsonEncode(StudentModel));
+    final responce = await http.put(Uri.parse(API+"/${s.id}"),body: jsonEncode(s));
 
-    if(responce.statusCode == 200) return true;
+    if(responce.statusCode == 201 || responce.body != null) return true;
 
     return false;
   }
@@ -57,7 +57,8 @@ class Student_Service{
   Future<bool> DeleteData(String id) async{
     final responce = await http.delete(Uri.parse(API+"/${id}"));
 
-    if(responce.statusCode == 200) return true;
+    print(responce);
+    if(responce.statusCode == 201 || responce.body != null) return true;
 
     return false;
   }
