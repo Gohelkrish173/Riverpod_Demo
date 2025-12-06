@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 class FakeService{
-  Future<String> fetchGreeting() async{
+  Future<String> fetchGreeting({int? id}) async{
     await Future.delayed(const Duration(seconds: 2));
 
     // simulate the 30% chance of failure.
@@ -10,6 +10,7 @@ class FakeService{
       throw Exception('Failed to fetch greeting');
     }
 
-    return 'Hello from Async';
+    final value = 'Hello from Async';
+    return id == null ? value : value + '$id';
   }
 }

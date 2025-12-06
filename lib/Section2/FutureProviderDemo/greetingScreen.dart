@@ -8,8 +8,14 @@ import 'package:riverpod_exercise/Section2/FutureProviderDemo/fake_api_service.d
 // Provide _ in parameter for no provide any parameter.
 final fakeApiProvider = Provider((_)=>FakeService());
 
-final greetingFutureProvider = FutureProvider((Ref ref) async{
+// with family you can also provide parameters
+// it is use for getall and GetbyId
+// whenever greetingFutureProvider is not use it automatically clear memory or dispose the state
+final greetingFutureProvider = FutureProvider.autoDispose.family<String,int?>((Ref ref,id) async{
   final service = ref.read(fakeApiProvider);
+
+  if(id != 0) return await service.fetchGreeting(id:id);
+
   return await service.fetchGreeting();
 });
 
@@ -22,7 +28,7 @@ class Greetingscreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     // Watch Future Provider
-    final greetingAsync = ref.watch(greetingFutureProvider);
+    final greetingAsync = ref.watch(greetingFutureProvider(0));
 
     return Scaffold(
       appBar: AppBar(title: const Text('Async Greeting.'),),
@@ -38,7 +44,7 @@ class Greetingscreen extends ConsumerWidget {
               const SizedBox(height: 12,),
               ElevatedButton(
                 // it is re-run the a Provider and reset it's state.
-                onPressed: () => ref.refresh(greetingFutureProvider),
+                onPressed: () => ref.refresh(greetingFutureProvider(100)),
                 child: const Text('Retry'),
               ),
             ],
