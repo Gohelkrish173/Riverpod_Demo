@@ -36,5 +36,5 @@ final filterTodosProvider = Provider<List<TodoModel>>((Ref ref){
     return todos;
   }
 
-  return todos.where((t)=>t.title.toLowerCase().contains(filter)).toList();
+  return todos.where((t)=>t.title.toLowerCase().contains(filter.toLowerCase())).toList();
 });

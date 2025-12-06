@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_exercise/Section%203/Computed%20And%20Derieved%20Providers/derived_providers.dart';
+import 'package:riverpod_exercise/Section%203/Computed%20And%20Derieved%20Providers/computed_derived_providers.dart';
 
 class FilterScreen extends ConsumerWidget {
   const FilterScreen({super.key});
