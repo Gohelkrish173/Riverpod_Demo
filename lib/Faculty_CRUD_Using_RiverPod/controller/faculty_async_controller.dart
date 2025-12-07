@@ -27,11 +27,33 @@ class FacultyAsyncNotifier extends AsyncNotifier<List<FacultyModel>>{
       bool res = await ref.read(faculty_service_provider).DeleteData(id);
 
       if(res) state = AsyncValue.data(list.where((t)=>t.id != id).toList());
+    }
+    catch(e){
+      state = AsyncValue.error(e,StackTrace.current);
+    }
+  }
+
+  // when FacultyUpdated change that object using this method
+  Future<void> UpdateFaculty_In_AsyncList(FacultyModel fac) async{
+    try{
+      list = list.map((t)=>t.id == fac.id ? fac : t).toList();
 
       state = AsyncValue.data(list);
     }
     catch(e){
-      state = AsyncValue.error(e,StackTrace.current);
+      state = AsyncValue.error(e, StackTrace.current);
+    }
+  }
+
+  // when FacultyInserted then add that Faculty in AsyncList using this method
+  Future<void> AddFaculty_In_AsyncList(FacultyModel fac) async{
+    try{
+      list = [...list,fac];
+
+      state = AsyncValue.data(list);
+    }
+    catch(e){
+      state = AsyncValue.error(e, StackTrace.current);
     }
   }
 

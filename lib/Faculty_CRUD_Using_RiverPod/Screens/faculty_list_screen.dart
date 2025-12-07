@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/Screens/faculty_form_screen.dart';
 import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/controller/faculty_async_controller.dart';
 import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/providers/filter_by_name_provider.dart';
 
@@ -11,7 +12,7 @@ class FacultyListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final FacultyAsync = ref.watch(filtered_Faculty_List);
-    final FaculyAsync = ref.watch(faculty_async_notifier_provider);
+    // final FaculyAsync = ref.watch(faculty_async_notifier_provider);
     final notifier = ref.watch(faculty_async_notifier_provider.notifier);
 
     return Scaffold(
@@ -72,11 +73,26 @@ class FacultyListScreen extends ConsumerWidget {
                                     fontWeight: FontWeight.bold
                                 ),
                               ),
-                              IconButton(
-                                onPressed: (){
-                                  notifier.DeleteFaculty(faculty.id!);
-                                },
-                                icon: Icon(Icons.delete,color: Colors.red,),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: (){
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context)=>FacultyFormScreen(id: faculty.id,)
+                                        ),
+                                      );
+                                    },
+                                    icon: Icon(Icons.edit,color: Colors.yellow,),
+                                  ),
+                                  SizedBox(width: 10,),
+                                  IconButton(
+                                    onPressed: (){
+                                      notifier.DeleteFaculty(faculty.id!);
+                                    },
+                                    icon: Icon(Icons.delete,color: Colors.red,),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -89,6 +105,16 @@ class FacultyListScreen extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: (){
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => FacultyFormScreen(),
+            )
+          );
+        }
       ),
     );
   }

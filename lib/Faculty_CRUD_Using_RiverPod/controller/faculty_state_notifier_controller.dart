@@ -1,15 +1,17 @@
 
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/Model/faculty_model.dart';
 import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/Services/faculty_service.dart';
+import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/controller/faculty_async_controller.dart';
 
 // Create StateNotifier
 
 final faculty_state_notifier_provider = StateNotifierProvider<FacultyStateNotifier,FacultyModel>(
     (ref){
-      return FacultyStateNotifier(FacultyService(),
+      return FacultyStateNotifier(ref,FacultyService(),
           FacultyModel(Name: "", FacId: 0, Dept: "", Salary: 0)
       );
     }
@@ -19,8 +21,9 @@ final faculty_state_notifier_provider = StateNotifierProvider<FacultyStateNotifi
 // in StateNotifier ref not directly like AsyncNotifier
 class FacultyStateNotifier extends StateNotifier<FacultyModel>{
   final FacultyService service;
+  final ref;
 
-  FacultyStateNotifier(this.service,super.state);
+  FacultyStateNotifier(this.ref,this.service,super.state);
 
   void updateName(String name){
     state = state.copyWith(Name: name.trim());
@@ -74,7 +77,11 @@ class FacultyStateNotifier extends StateNotifier<FacultyModel>{
       final result = await service.InsertData(encoded);
 
       if(result) {
+        await ref.watch(faculty_async_notifier_provider.notifier)
+        .AddFaculty_In_AsyncList(model);
+
         state = FacultyModel(Name: "", FacId: 0, Dept: "", Salary: 0);
+
         return true;
       }
 
@@ -105,6 +112,8 @@ class FacultyStateNotifier extends StateNotifier<FacultyModel>{
 
       if(result) {
         // clear the State
+        await ref.watch(faculty_async_notifier_provider.notifier)
+            .UpdateFaculty_In_AsyncList(model);
         state = FacultyModel(Name: "", FacId: 0, Dept: "", Salary: 0);
         return true;
       }
