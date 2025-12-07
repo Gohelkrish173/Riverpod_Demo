@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/Screens/faculty_list_screen.dart';
 import 'package:riverpod_exercise/Section%203/Computed%20And%20Derieved%20Providers/computed_derived_filter_screen.dart';
 import 'package:riverpod_exercise/Section%203/Computed%20And%20Derieved%20Providers/derived_screen.dart';
 import 'package:riverpod_exercise/Section%203/Select%20Operations/select_list_screen.dart';
@@ -63,6 +64,9 @@ class MyApp extends ConsumerWidget {
     // return FilterScreen();
 
     // return SimpleSelectDemo();
-    return CompareSelectSelect();
+    // return CompareSelectSelect();
+
+    // Faculty CRUD Operation
+    return FacultyListScreen();
   }
 }
