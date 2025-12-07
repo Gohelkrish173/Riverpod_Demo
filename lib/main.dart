@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_exercise/Section%203/Computed%20And%20Derieved%20Providers/computed_derived_filter_screen.dart';
 import 'package:riverpod_exercise/Section%203/Computed%20And%20Derieved%20Providers/derived_screen.dart';
+import 'package:riverpod_exercise/Section%203/Select%20Operations/select_list_screen.dart';
+import 'package:riverpod_exercise/Section%203/Select%20Operations/select_simple_demo.dart';
 import 'package:riverpod_exercise/Section2/AsyncNotifierDemo/async_notifier_greeting_screen_demo.dart';
 import 'package:riverpod_exercise/Section2/FutureProviderDemo/StudentData_Using_FutureProvider.dart';
 import 'package:riverpod_exercise/Section2/FutureProviderDemo/foodData_using_FutureProvider.dart';
@@ -58,6 +60,9 @@ class MyApp extends ConsumerWidget {
    // Section 3
 
     // return SumScreen();
-    return FilterScreen();
+    // return FilterScreen();
+
+    // return SimpleSelectDemo();
+    return CompareSelectSelect();
   }
 }

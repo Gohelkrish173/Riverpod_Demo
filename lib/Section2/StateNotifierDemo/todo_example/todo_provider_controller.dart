@@ -5,7 +5,10 @@ import 'package:riverpod_exercise/Section2/StateNotifierDemo/todo_example/todo_m
 // StateNotifier Provider
 
 final todoListProvider = StateNotifierProvider<TodoListNotifier,List<TodoModel>>(
-        (ref)=>TodoListNotifier([]),
+    (ref)=>TodoListNotifier(List.generate(10,
+       (i)=>TodoModel(id: i, title: 'Task $i', completed: i %3 == 0)
+     ,),
+    ),
 );
 
 // Class
