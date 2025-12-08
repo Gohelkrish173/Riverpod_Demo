@@ -49,7 +49,9 @@ class FacultyService {
       body: encoded_fac,
     );
 
-    if(responce.statusCode == 200 || responce.statusCode == 201) return true;
+    if(responce.statusCode == 200 || responce.statusCode == 201){
+      return true;
+    };
 
     return false;
   }

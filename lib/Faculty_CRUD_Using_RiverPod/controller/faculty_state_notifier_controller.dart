@@ -63,7 +63,6 @@ class FacultyStateNotifier extends StateNotifier<FacultyModel>{
 
     try{
       final model = FacultyModel(
-        id: "",
         Name: state.Name,
         FacId: state.FacId,
         Dept: state.Dept,
@@ -77,8 +76,9 @@ class FacultyStateNotifier extends StateNotifier<FacultyModel>{
       final result = await service.InsertData(encoded);
 
       if(result) {
+
         await ref.watch(faculty_async_notifier_provider.notifier)
-        .AddFaculty_In_AsyncList(model);
+        .AddFaculty_In_AsyncList();
 
         state = FacultyModel(Name: "", FacId: 0, Dept: "", Salary: 0);
 
@@ -88,7 +88,8 @@ class FacultyStateNotifier extends StateNotifier<FacultyModel>{
       return false;
     }
     catch(e){
-      throw Exception(e);
+      print("======================================================$e");
+      return false;
     }
   }
 
@@ -121,7 +122,8 @@ class FacultyStateNotifier extends StateNotifier<FacultyModel>{
       return false;
     }
     catch(e){
-      throw Exception(e);
+      print("======================================================$e");
+      return false;
     }
   }
 }

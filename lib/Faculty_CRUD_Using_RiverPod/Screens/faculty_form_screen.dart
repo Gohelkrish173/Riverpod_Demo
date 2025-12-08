@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/Model/faculty_model.dart';
 import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/Services/faculty_service.dart';
 import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/controller/faculty_state_notifier_controller.dart';
+import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/providers/error_handling_provider.dart';
 import 'package:riverpod_exercise/Faculty_CRUD_Using_RiverPod/providers/faculty_by_id_provider.dart';
 
 // Provider
@@ -24,11 +25,9 @@ class _FacultyFormScreenState extends ConsumerState<FacultyFormScreen> {
   final facIdController = TextEditingController();
   final salaryController = TextEditingController();
 
-  String responce = "";
-
   @override
   void initState() {
-    final fac = ref.read(facById_FutureProvider(widget.id!)).maybeWhen(
+    final fac = ref.read(facById_FutureProvider(widget.id ?? 0)).maybeWhen(
         data: (data)=>data,
         orElse: ()=>FacultyModel(Name: '', FacId: 0, Dept: '', Salary: 0)
     );
@@ -36,6 +35,7 @@ class _FacultyFormScreenState extends ConsumerState<FacultyFormScreen> {
     deptController.text = fac.Dept;
     facIdController.text = fac.FacId.toString();
     salaryController.text = fac.Salary.toString();
+    super.initState();
   }
 
   @override
@@ -44,11 +44,14 @@ class _FacultyFormScreenState extends ConsumerState<FacultyFormScreen> {
     deptController.dispose();
     facIdController.dispose();
     salaryController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final notifier = ref.watch(faculty_state_notifier_provider.notifier);
+    final notifier = ref.read(faculty_state_notifier_provider.notifier);
+    final error = ref.watch(error_state_provider.select((t)=>t));
+    final error_notifier = ref.read(error_state_provider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: Text('Faculty Form'),),
@@ -56,7 +59,7 @@ class _FacultyFormScreenState extends ConsumerState<FacultyFormScreen> {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
-            responce == '' ? Text('') : Text(responce,style: TextStyle(color: Colors.red),),
+            error == '' ? Text('') : Text(error,style: TextStyle(color: Colors.red),),
             TextField(
               controller: nameController,
               decoration: InputDecoration(
@@ -116,7 +119,7 @@ class _FacultyFormScreenState extends ConsumerState<FacultyFormScreen> {
                     }
 
                     else{
-                      responce = "Operation Failed.";
+                     error_notifier.state  = "Operation Failed.";
                     }
                   },
                   icon: Icon(Icons.save,size: 16,),
